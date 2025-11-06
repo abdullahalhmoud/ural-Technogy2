@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صناديق الكاش وأجهزة البصمة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1b6468; 
+            --secondary-color: #258a91;
+            --accent-color: #3fb5ba; 
+            --text-dark: #1a202c;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+            --bg-dark: #1a202c;
+            --font-primary: 'Cairo', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        .category-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .product-price {
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        /* نافذة المواصفات */
+        .specs-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFade 0.3s;
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .modal-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .specs-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .specs-list {
+            list-style-type: none;
+            margin-bottom: 10px;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            display: flex;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .specs-list li:before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .work-method {
+            background-color: #f0f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-right: 4px solid var(--accent-color);
+        }
+
+        .work-method p {
+            margin: 0;
+        }
+
+        .modal-price {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px 0;
+            color: var(--text-light);
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>صناديق الكاش وأجهزة البصمة</h1>
+            <p class="subtitle">انقر على أي منتج لمعرفة مواصفاته وطريقة العمل</p>
+        </header>
+
+        <h2 class="category-title">صناديق الكاش</h2>
+        <div class="products-grid">
+            <!-- المنتج 1 -->
+            <div class="product-card" onclick="showSpecs(1)">
+                <img src="https://i.ibb.co/gZqJwbBK/Whats-App-Image-2025-11-01-at-1-27-26-PM.jpg" alt="Whats-App-Image-2025-11-01-at-1-27-26-PM" border="0">
+                <div class="product-info">
+                    <h3 class="product-title">صندوق كاش 5.5 كغ</h3>
+                    <p class="product-description">صندوق كاش معدني صغير الحجم يستخدم لحفظ النقود المعدنية والأوراق النقدية.</p>
+                    <div class="product-price">25 دينار</div>
+                </div>
+            </div>
+
+            <!-- المنتج 2 -->
+            <div class="product-card" onclick="showSpecs(2)">
+                <img src="https://i.ibb.co/JW1KmFVS/Whats-App-Image-2025-11-01-at-1-27-26-PM-1.jpg" alt="Whats-App-Image-2025-11-01-at-1-27-26-PM-1" border="0">
+                <div class="product-info">
+                    <h3 class="product-title">صندوق كاش 7 كغ</h3>
+                    <p class="product-description">صندوق متوسط الحجم مناسب للمحلات ذات حجم مبيعات متوسط.</p>
+                    <div class="product-price">45 دينار</div>
+                </div>
+            </div>
+
+            <!-- المنتج 3 -->
+            <div class="product-card" onclick="showSpecs(3)">
+                <img src="https://i.ibb.co/k6kSPs0T/Whats-App-Image-2025-11-01-at-1-27-26-PM-2.jpg" alt="Whats-App-Image-2025-11-01-at-1-27-26-PM-2" border="0">
+                <div class="product-info">
+                    <h3 class="product-title">صندوق كاش 11 كغ</h3>
+                    <p class="product-description">صندوق كاش احترافي وسميك، مخصص للأماكن التي تتعامل مع مبالغ مالية كبيرة.</p>
+                    <div class="product-price">60 دينار</div>
+                </div>
+            </div>
+
+            <!-- المنتج 6 -->
+            <div class="product-card" onclick="showSpecs(6)">
+                <img src="https://i.ibb.co/PZRJKL3Y/Whats-App-Image-2025-11-01-at-1-27-26-PM-3.jpg" alt="Whats-App-Image-2025-11-01-at-1-27-26-PM-3" border="0">
+                <div class="product-info">
+                    <h3 class="product-title">صندوق كاش قلاب</h3>
+                    <p class="product-description">صندوق كاش احترافي بغطاء علوي يُفتح لأعلى (قلاب)، مناسب للأماكن ذات المساحة المحدودة.</p>
+                    <div class="product-price">70 دينار</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">أجهزة البصمة</h2>
+        <div class="products-grid">
+            <!-- المنتج 4 -->
+            <div class="product-card" onclick="showSpecs(4)">
+                <img src="https://i.ibb.co/BK2HWPWy/Whats-App-Image-2025-11-01-at-1-27-27-PM.jpg" alt="Whats-App-Image-2025-11-01-at-1-27-27-PM" border="0">
+                <div class="product-info">
+                    <h3 class="product-title">جهاز البصمة ZKTeco MB20</h3>
+                    <p class="product-description">جهاز حضور وانصراف يعتمد على بصمة الإصبع وبطاقة RFID لتسجيل دخول وخروج الموظفين.</p>
+                    <div class="product-price">90 دينار</div>
+                </div>
+            </div>
+
+            <!-- المنتج 5 -->
+            <div class="product-card" onclick="showSpecs(5)">
+                <img src="https://i.ibb.co/VYW3sfgW/Whats-App-Image-2025-11-01-at-1-27-27-PM-1.jpg" alt="Whats-App-Image-2025-11-01-at-1-27-27-PM-1" border="0">
+                <div class="product-info">
+                    <h3 class="product-title">جهاز البصمة ZKTeco iFace 880</h3>
+                    <p class="product-description">جهاز متطور للتعرف على الوجه والبصمة لتسجيل الحضور والانصراف.</p>
+                    <div class="product-price">285 دينار</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- نافذة المواصفات -->
+        <div id="specsModal" class="specs-modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeSpecs()">&times;</span>
+                <h2 class="modal-title" id="modalTitle">اسم المنتج</h2>
+                <p class="modal-description" id="modalDescription">وصف المنتج</p>
+                
+                <div class="specs-section">
+                    <h3 class="section-title">المواصفات</h3>
+                    <ul class="specs-list" id="specsList">
+                        <!-- سيتم إضافة المواصفات هنا عبر الجافاسكريبت -->
+                    </ul>
+                </div>
+                
+                <div class="specs-section">
+                    <h3 class="section-title">طريقة العمل</h3>
+                    <div class="work-method" id="workMethod">
+                        <!-- سيتم إضافة طريقة العمل هنا عبر الجافاسكريبت -->
+                    </div>
+                </div>
+                
+                <div class="modal-price" id="modalPrice">السعر: 0 دينار</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>جميع الحقوق محفوظة &copy; 2023</p>
+        </footer>
+    </div>
+
+    <script>
+        // بيانات المنتجات
+        const products = {
+            1: {
+                title: "صندوق كاش 5.5 كغ",
+                description: "صندوق كاش معدني صغير الحجم يستخدم لحفظ النقود المعدنية والأوراق النقدية.",
+                price: "25",
+                specs: [
+                    "يحتوي على 5 خانات للأوراق و8 خانات معدنية",
+                    "مصنوع من فولاذ قوي"
+                ],
+                workMethod: "يتصل عادةً بطابعة الفواتير أو جهاز الـPOS ويفتح تلقائيًا عند إتمام عملية الدفع، أو يُفتح يدويًا بواسطة مفتاح."
+            },
+            2: {
+                title: "صندوق كاش 7 كغ",
+                description: "صندوق متوسط الحجم مناسب للمحلات ذات حجم مبيعات متوسط.",
+                price: "45",
+                specs: [
+                    "5 خانات أوراق، 8 خانات معدنية",
+                    "هيكل حديدي متين لتحمل الاستخدام اليومي"
+                ],
+                workMethod: "يتصل بالكهرباء أو عبر منفذ RJ11 بجهاز الكاشير أو الطابعة، ويُفتح تلقائيًا عند طباعة الفاتورة."
+            },
+            3: {
+                title: "صندوق كاش 11 كغ",
+                description: "صندوق كاش احترافي وسميك، مخصص للأماكن التي تتعامل مع مبالغ مالية كبيرة.",
+                price: "60",
+                specs: [
+                    "5 خانات أوراق، 8 خانات معدنية",
+                    "جسم حديدي ثقيل لزيادة الأمان"
+                ],
+                workMethod: "يعمل أوتوماتيكيًا عند تنفيذ أمر الدفع من نظام نقاط البيع، ويمكن قفله بالمفتاح لتأمين المال."
+            },
+            4: {
+                title: "جهاز البصمة ZKTeco MB20",
+                description: "جهاز حضور وانصراف يعتمد على بصمة الإصبع وبطاقة RFID لتسجيل دخول وخروج الموظفين.",
+                price: "90",
+                specs: [
+                    "سعة 200 بصمة وجه، 500 بصمة إصبع، 1000 بطاقة",
+                    "يدعم USB و TCP/IP للاتصال بالشبكة"
+                ],
+                workMethod: "يقوم الموظف بلمس حساس البصمة أو تمرير البطاقة لتسجيل الوقت تلقائيًا في النظام."
+            },
+            5: {
+                title: "جهاز البصمة ZKTeco iFace 880",
+                description: "جهاز متطور للتعرف على الوجه والبصمة لتسجيل الحضور والانصراف.",
+                price: "285",
+                specs: [
+                    "يدعم 500 بصمة وجه، 700 بصمة إصبع، 3000 بطاقة",
+                    "الاتصال عبر USB و TCP/IP"
+                ],
+                workMethod: "يتم التعرّف على الموظف عبر الكاميرا أو البصمة، ثم يُسجَّل وقت الدخول أو الخروج تلقائيًا في النظام."
+            },
+            6: {
+                title: "صندوق كاش قلاب",
+                description: "صندوق كاش احترافي بغطاء علوي يُفتح لأعلى (قلاب)، مناسب للأماكن ذات المساحة المحدودة.",
+                price: "70",
+                specs: [
+                    "6 خانات أوراق، 6 خانات معدنية",
+                    "قفل داخلي وخارجي لمزيد من الأمان",
+                    "غطاء حماية داخلي ضد الفتح المفاجئ"
+                ],
+                workMethod: "يُفتح عند استلام المدفوعات عبر النظام أو باستخدام المفتاح اليدوي، ويُغلق بإحكام لحماية النقود."
+            }
+        };
+
+        // عرض المواصفات
+        function showSpecs(productId) {
+            const product = products[productId];
+            const modal = document.getElementById('specsModal');
+            const title = document.getElementById('modalTitle');
+            const description = document.getElementById('modalDescription');
+            const specsList = document.getElementById('specsList');
+            const workMethod = document.getElementById('workMethod');
+            const price = document.getElementById('modalPrice');
+            
+            // تعبئة البيانات
+            title.textContent = product.title;
+            description.textContent = product.description;
+            price.textContent = `السعر: ${product.price} دينار`;
+            
+            // إضافة المواصفات
+            specsList.innerHTML = '';
+            product.specs.forEach(spec => {
+                const li = document.createElement('li');
+                li.textContent = spec;
+                specsList.appendChild(li);
+            });
+            
+            // إضافة طريقة العمل
+            workMethod.innerHTML = `<p>${product.workMethod}</p>`;
+            
+            // عرض النافذة
+            modal.style.display = 'flex';
+        }
+
+        // إغلاق نافذة المواصفات
+        function closeSpecs() {
+            document.getElementById('specsModal').style.display = 'none';
+        }
+
+        // إغلاق النافذة عند النقر خارجها
+        window.onclick = function(event) {
+            const modal = document.getElementById('specsModal');
+            if (event.target === modal) {
+                closeSpecs();
+            }
+        }
+    </script>
+</body>
+</html>

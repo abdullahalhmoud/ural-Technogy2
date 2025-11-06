@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <title>Ural Information Technology - Integrated Tech Solutions</title>
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1b6468; 
+            --secondary-color: #258a91;
+            --accent-color: #3fb5ba; 
+            --text-dark: #1a202c;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+            --bg-dark: #1a202c;
+            --font-primary: 'Cairo', sans-serif;
+        }  
+        
+        * {
+            box-sizing: border-box;
+        }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px;
+        }
+
+        .header-logo img {
+            width: 50px; /* يمكنك تعديل الحجم حسب رغبتك */
+            height: auto;
+            border-radius: 8px; /* يجعل الحواف ناعمة */
+        }
+
+        .header-logo h1 {
+            font-size: 22px;
+            margin: 0;
+            color: #222;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            margin: 0;
+            font-family: var(--font-primary);
+            background: var(--bg-light);
+            color: var(--text-dark);
+            direction: rtl;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-padding {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3 {
+            color: var(--text-dark);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        
+        .section-tag {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            display: block;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .cta-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .secondary-cta {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .secondary-cta:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        
+        header {
+            background: var(--primary-color);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo { 
+            font-size: 1.8rem;
+            font-weight: 900; 
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 25px;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        header nav a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s;
+        }
+        
+        header nav a:hover:after {
+            width: 100%;
+        }
+        
+        header nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(27, 100, 104, 0.85), rgba(37, 138, 145, 0.8)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero .container {
+            margin: 0 auto;
+        }
+        
+        .hero h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 15px;
+            color: #fff; 
+            font-weight: 900;
+        }
+        
+        .hero-subtext {
+            font-size: 1.2rem;
+            color: #cbd5e0;
+            margin-bottom: 10px;
+        }
+        
+        .hero-main-p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-main-p strong {
+            color: #ecc94b; 
+        }
+        
+        #services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+        }
+        
+        #services .section-tag {
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: 0.4s;
+            border-right: 5px solid var(--primary-color);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-right-color: var(--accent-color);
+        }
+        
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+        
+        .service-card h4 {
+            color: var(--text-dark);
+            margin-top: 20px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 5px;
+        }
+        
+        .service-card ul {
+            padding-right: 20px;
+            list-style: none;
+        }
+        
+        .service-card ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .service-card ul li::before {
+            content: '✅';
+            position: absolute;
+            right: 0;
+            font-size: 14px;
+        }
+        
+        .services-more {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background: #edf2f7;
+            border-radius: 8px;
+            border-right: 5px solid var(--accent-color);
+        }
+
+        .divider {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+            margin: 40px 0;
+        }
+
+        #products {
+            text-align: center;
+            background: #ffffff;
+        }
+        
+        .products-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .category-card {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .category-card:hover {
+            transform: scale(1.03);
+            border-bottom-color: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .category-card .icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .category-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+        }
+        
+        .products-action {
+            margin-top: 40px;
+        }
+
+        /* ============================================== */
+        /* قسم التواصل (Contact) */
+        /* ============================================== */
+        #contact {
+            text-align: center;
+            background: var(--bg-light);
+        }
+        
+        .contact-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        /* ============================================== */
+        /* الفوتر (Footer) */
+        /* ============================================== */
+        footer {
+            background: var(--bg-dark);
+            color: #cbd5e0;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright-text {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            header nav {
+                margin-top: 15px;
+            }
+            
+            header nav a {
+                margin: 0 10px;
+            }
+            
+            .section-padding {
+                padding: 40px 0;
+            }
+            
+            .service-card {
+                border-right: none;
+                border-bottom: 5px solid var(--primary-color);
+            }
+        }
+    </style>
+</head>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <title>
+        Ural Information Technology - Integrated Tech Solutions
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header> 
+    <div class="container">
+        <a href="#" class="logo">
+            Ural Information Technology
+        </a>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#products">Products</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <p class="hero-subtext">A Technological Vision Inspiring the Future</p>
+        <h1>Innovative Tech Solutions to Grow Your Business</h1>
+        <p class="hero-main-p">From ERP systems to AI and mobile applications — everything your company needs in one place with world-class quality.</p>
+        <a href="#contact" class="cta-button">Request a Free Consultation</a>
+    </div>
+</section>
+
+<section id="services" class="container section-padding">
+    <p class="section-tag">🔥 Our Core Services</p>
+    <h2>We Cover Your Business Needs from Start to Launch</h2>
+    
+    <div class="services-grid">
+        <div class="service-card expanded-card">
+            <h3>🧾 Barcode Solutions</h3>
+            <p>We provide integrated barcode systems to manage and track products efficiently, helping companies organize inventory and speed up sales and billing.</p>
+            <h4>How It Works:</h4>
+            <ul>
+                <li>Generation & Printing: Unique barcode codes for each product.</li>
+                <li>Scanning & Tracking: Use scanners to read codes and track product movement.</li>
+                <li>Integration: Connect data with inventory or POS systems.</li>
+                <li>Reports: Real-time reports on inventory levels and sales.</li>
+            </ul>
+        </div>
+
+        <div class="service-card expanded-card">
+            <h3>⚙️ ERP & Hybrid Systems</h3>
+            <p>An integrated system for managing resources, sales, inventory, and accounting — unifying all operations in a single central database.</p>
+            <h4>How It Works:</h4>
+            <ul>
+                <li>Centralization: One database for all departments.</li>
+                <li>Monitoring: Interactive dashboards displaying KPIs.</li>
+                <li>Flexibility: Integration with Cloud or On-premise environments.</li>
+                <li>Real-Time Updates: Instant data synchronization across departments.</li>
+            </ul>
+        </div>
+
+        <div class="service-card expanded-card">
+            <h3>🌐 Website Development</h3>
+            <p>We design and develop professional, responsive, and high-performance websites that reflect your brand identity and attract customers.</p>
+            <h4>How It Works:</h4>
+            <ul>
+                <li>Planning: Analyze client needs and design UX/UI structures.</li>
+                <li>Development: Build with modern technologies such as HTML, CSS, JavaScript, PHP.</li>
+                <li>Testing: Ensure quality through performance and functionality testing.</li>
+                <li>Launch & Support: Publish the website and provide technical support.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="services-more">
+        <p>Discover more: Mobile Apps, Security Awareness Platforms, and AI Solutions.</p>
+    </div>
+</section>
+
+<hr class="divider">
+
+<section id="products" class="container section-padding">
+    <p class="section-tag">🛒 Our Hardware & Software Products</p>
+    <h2>Advanced Devices and Systems for Your Workplace</h2>
+    
+    <div class="products-categories">
+        <a href="ural4.html" class="category-card">
+            <span class="icon">🖨️</span>
+            <h3>Receipt & Label Printers</h3>
+            <p>High-speed thermal printers suitable for POS and restaurants, providing clear invoices and quick receipts.</p>
+        </a>
+
+        <a href="ural2.html" class="category-card">
+            <span class="icon">🔑</span>
+            <h3>Cash Drawers & Biometric Devices</h3>
+            <p>Accurate face and fingerprint scanners for efficient employee attendance management integrated with HR systems.</p>
+        </a>
+
+        <a href="ural3.html" class="category-card">
+            <span class="icon">💰</span>
+            <h3>Printers & Scales</h3>
+            <p>Secure and rust-resistant cash drawers compatible with POS systems to ensure safe and smooth cash transactions.</p>
+        </a>
+
+        <a href="ural5.html" class="category-card">
+            <span class="icon">📦</span>
+            <h3>POS & Scanners</h3>
+            <p>Fast and accurate scanners (wired and wireless) for effortless inventory management in warehouses and stores.</p>
+        </a>
+    </div>
+    
+    <div class="products-action">
+        <a href="https://example.com/catalog" class="cta-button secondary-cta">Browse Full Catalog</a>
+    </div>
+</section>
+
+<section id="contact" class="container section-padding">
+    <h2>Contact Us 📞</h2>
+    <p class="contact-text">We’re ready to discuss your business challenges and provide customized technology solutions.</p>
+    <div style="margin-top: 30px;">
+        <p><i class="fas fa-phone" style="margin-left: 10px;"></i> 0797990989</p>
+        <p><i class="fas fa-envelope" style="margin-left: 10px;"></i> info@uraljo.com</p>
+        <p><i class="fas fa-globe" style="margin-left: 10px;"></i> www.uraljo.com</p>
+        <p><i class="fas fa-map-marker-alt" style="margin-left: 10px;"></i> Amman - Wasfi Al-Tal Street</p>
+        
+    </div>
+</section>
+
+<footer id="about">
+    <div class="container">
+        <p class="footer-logo">Ural Information Technology</p>
+        <div class="footer-links">
+            <a href="#services">Services</a>
+            <a href="#products">Products</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+        <p class="copyright-text">© 2025 All Rights Reserved – Ural Information Technology</p>
+    </div>
+</footer>
+
+</body>
+</html>
